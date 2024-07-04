@@ -1,32 +1,32 @@
 import React, {useState} from "react";
 
-const Home = () => {
-	const [ inputValue, setInputValue ] = useState("")
-	const [ items, setItems ] = useState([])
+const TodoList = () => {
+	const [ newTask, setNewTask ] = useState("")
+	const [ tasksList, SetTasksList ] = useState([])
 	return (
 		<div className="container">
 			<h1>Morning todos</h1>
 			<ul>
 				<li><input 
 						type="text" 
-						onChange={(e) => setInputValue(e.target.value)}
-						value={inputValue}
+						onChange={(e) => setNewTask(e.target.value)}
+						value={newTask}
 						onKeyDown={(e) => {
 							if (e.key === 'Enter') {
-							  setItems([...items, inputValue]);
-							  setInputValue('');
+							  SetTasksList([...tasksList, newTask]);
+							  setNewTask('');
 							}
 						  }}
 						placeholder="Add a new task">
 					</input></li>
-					{items.map((item, index) => (
+					{tasksList.map((item, index) => (
 						<li>
 							<span>{item}</span>
 							<div className="icon">
 								<i 
 									className="fa-solid fa-x" 
-									onClick={() => setItems(
-										items.filter(
+									onClick={() => SetTasksList(
+										tasksList.filter(
 											(t, currentIndex) => 
 												index != currentIndex
 										)
@@ -36,13 +36,13 @@ const Home = () => {
 					))}
 			</ul>
 			<div><p>
-					{items.length === 0
+					{tasksList.length === 0
             		? "No pending tasks"
-            		: `${items.length} pending 
-					${items.length === 1 ? "task" : "tasks"}`}
-				</p></div>
+            		: `${tasksList.length} pending 
+					${tasksList.length === 1 ? "task" : "tasks"}`}
+			</p></div>
 		</div>
 	);
 };
 
-export default Home;
+export default TodoList;
